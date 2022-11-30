@@ -10,6 +10,20 @@ from surprise.model_selection import train_test_split
 
 class AlgoEvaluator():
     def __init__(self, algo: AlgoBase, algo_name:str , n_factors:int, n_epochs:int, lr_all:float = None, reg_all: float = None, data_file: str = None, loo_train_file: str = None, loo_test_file: str = None, verbose: bool = True) -> None:
+        """
+
+        Args:
+            algo (AlgoBase): Instance of the algorithm to be evaluated
+            algo_name (str): Name of the algorithm
+            n_factors (int): Number of factors (passed on to the algorithm)
+            n_epochs (int): Number of epochs to train (passed on to the algorithm)
+            lr_all (float): Learning rate all (passed on to the algorithm)
+            reg_all (float): Regularization all (passed on to the algorithm)
+            data_file (str): Data file containing ratings
+            loo_train_file (str): Leave One Out Train File
+            loo_test_file (str): Leave One Out Test File
+            verbose (bool, optional): Show progress or not. Defaults to True.
+        """
         print(f"Working for {algo_name}")
 
         root_wd = os.getcwd()
@@ -29,6 +43,14 @@ class AlgoEvaluator():
         self.trainset, self.testset, self.loo_trainset, self.loo_testset = self._create_modular_datasets()
         
     def _create_surprise_dataset(self, data_file:str):
+        """_summary_
+
+        Args:
+            data_file (str): _description_
+
+        Returns:
+            _type_: _description_
+        """
         if self.verbose: print("Creating surprise dataset")
         reader = Reader(line_format="user item rating", sep="::", rating_scale=(1, 5))
         data = Dataset.load_from_file(data_file, reader=reader)
@@ -87,6 +109,7 @@ class AlgoEvaluator():
 
         return recommendations
 
+    
     def _generate_recommendations_all_users(self, algo: AlgoBase, n_recommendations: int):
         recommendations_all = {}
 
