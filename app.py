@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from models import MovieOut, Query
-from Recomender import Recommender
+from Recommender import Recommender
 
 recommender = Recommender('SVD++_20_20_0.007_0.02.pkl')
 
