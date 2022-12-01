@@ -7,7 +7,7 @@
 - **[Surprise](https://surprise.readthedocs.io/en/stable/)**
 
 ---
-
+ 
 ## Steps to run
 1. Make a virtual environment with python 3.10.2
     ```bash
